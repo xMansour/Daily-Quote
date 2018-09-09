@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#434343</color>
+    <color name="colorPrimaryDark">#190019</color>
+    <color name="colorAccent">#FFFFFF</color>
+    <color name="color_button">#d29212</color>
+    <color name="color_text">#d29212</color>
+    <color name="color_text_2">#f9145a</color>
+    <color name="black">#000000</color>
+    <color name="dark_purple">#0c0c3d</color>
+    <color name="button_start">#f9f9f9</color>
+    <color name="button_stop">#d9534f</color>
+    <color name="button_time_picker">#5cb85c</color>
+</resources>
