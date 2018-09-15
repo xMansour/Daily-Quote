@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <corners android:radius="20dp"/>
-    <solid android:color="@color/colorAccent"/>
-    <stroke android:width="1dp" android:color="@color/button_time_picker"/>
+    <solid android:color="@color/github_white"/>
+    <stroke android:width="1dp" android:color="@color/github_dark_white"/>
     <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp"/>
 
 </shape>

@@ -1,4 +1,4 @@
-package com.example.mansour.dailyquotenotification;
+package com.mansourappdevelopment.androidapp.dailyquote;
 
 import android.app.IntentService;
 import android.app.Notification;
@@ -9,8 +9,6 @@ import android.media.RingtoneManager;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +36,7 @@ public class SendNotificationService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        Log.e("normal", "Service restarted");
+        //Log.e("normal", "Service restarted");
         BufferedReader reader = new BufferedReader(new InputStreamReader(getResources().openRawResource(R.raw.quotes)));
         try {
             while ((line = reader.readLine()) != null)
@@ -81,7 +79,7 @@ public class SendNotificationService extends IntentService {
                     PendingIntent.getActivity(this, 0,
                             Intent.createChooser(new Intent(Intent.ACTION_SEND)
                                     .setType("text/plain")
-                                    .putExtra(Intent.EXTRA_TEXT, "\"" + quoteText + "\" -" + quoteAuthor), "Daily Notification Quote"),
+                                    .putExtra(Intent.EXTRA_TEXT, "\"" + quoteText + "\" -" + quoteAuthor), "Daily Quote"),
                             PendingIntent.FLAG_UPDATE_CURRENT));
             mNotification.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
             NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -97,7 +95,7 @@ public class SendNotificationService extends IntentService {
                     PendingIntent.getActivity(this, 0,
                             Intent.createChooser(new Intent(Intent.ACTION_SEND)
                                     .setType("text/plain")
-                                    .putExtra(Intent.EXTRA_TEXT, "\"" + quoteText + "\" -" + quoteAuthor), "Daily Notification Quote"),
+                                    .putExtra(Intent.EXTRA_TEXT, "\"" + quoteText + "\" -" + quoteAuthor), "Daily Quote"),
                             PendingIntent.FLAG_UPDATE_CURRENT));
             mNotification.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
             NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

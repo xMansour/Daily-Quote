@@ -1,48 +1,48 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/activity_background_gradient"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:padding="10dp"
     >
 
+    <TextView
+        android:id="@+id/textViewStartQuote"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/font_normal"
+        android:padding="20dp"
+        android:text="@string/starting_quote"
+        android:textAlignment="center"
+        android:textColor="@color/github_white"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/btnSetTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textViewTime"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="93dp"
+        android:layout_margin="10dp"
         android:background="@drawable/button_start"
         android:text="@string/start_service"
         android:textAllCaps="false"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20dp"
+        android:textColor="@color/github_white"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="65dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="50dp"
         android:text="@string/time_isn_t_set_yet"
         android:textAlignment="center"
-        android:textColor="@color/color_text"
-        android:textSize="20dp"
-         />
+        android:textColor="@color/github_white"
+        android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/textViewStartQuote"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnSetTime"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="34dp"
-        android:fontFamily="@font/font_normal"
-        android:padding="20dp"
-        android:text="@string/starting_quote"
-        android:textAlignment="center"
-        android:textColor="@color/color_text"
-        android:textSize="20dp" />
-</RelativeLayout>
+
+</LinearLayout>

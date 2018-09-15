@@ -1,4 +1,4 @@
-package com.example.mansour.dailyquotenotification;
+package com.mansourappdevelopment.androidapp.dailyquote;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

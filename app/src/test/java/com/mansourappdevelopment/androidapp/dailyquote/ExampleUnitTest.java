@@ -1,4 +1,4 @@
-package com.example.mansour.dailyquotenotification;
+package com.mansourappdevelopment.androidapp.dailyquote;
 
 import org.junit.Test;
 

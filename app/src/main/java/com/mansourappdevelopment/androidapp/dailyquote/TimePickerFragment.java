@@ -1,4 +1,4 @@
-package com.example.mansour.dailyquotenotification;
+package com.mansourappdevelopment.androidapp.dailyquote;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +23,12 @@ public class TimePickerFragment extends android.support.v4.app.DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_time_picker, container, false);
+        return mView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mTimePicker = mView.findViewById(R.id.timePicker);
         mBtnOk = mView.findViewById(R.id.btnOk);
         mBtnOk.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +47,5 @@ public class TimePickerFragment extends android.support.v4.app.DialogFragment {
                 dismiss();
             }
         });
-        return mView;
     }
-
 }

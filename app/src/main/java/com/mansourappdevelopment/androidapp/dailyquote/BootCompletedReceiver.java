@@ -1,8 +1,7 @@
-package com.example.mansour.dailyquotenotification;
+package com.mansourappdevelopment.androidapp.dailyquote;
 
 import android.app.AlarmManager;
-//import android.app.Notification;
-//import android.app.NotificationManager;
+
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,12 +13,13 @@ import android.content.SharedPreferences;
 //import android.os.Bundle;
 //import android.preference.PreferenceManager;
 //import android.support.v4.app.NotificationCompat;
-import android.util.Log;
+//import android.app.Notification;
+//import android.app.NotificationManager;
+//import static android.content.Context.MODE_WORLD_READABLE;
+//import static android.content.Context.NOTIFICATION_SERVICE;
 
 import java.util.Calendar;
 
-//import static android.content.Context.MODE_WORLD_READABLE;
-//import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * Created by Mansour on 9/1/2018.
@@ -36,7 +36,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
-            Log.e("normal", "true");
+            //Log.e("normal", "true");
             SharedPreferences mSharedPreferences = context.getSharedPreferences("data",Context.MODE_PRIVATE);
             mHour = mSharedPreferences.getInt("hour", 0);
             mMinute = mSharedPreferences.getInt("minute", 0);
