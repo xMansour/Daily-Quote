@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 
@@ -45,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
     String mHourConvention;
     boolean mSet = false;
     boolean mTurnOffAds = false;
+    boolean mAdsPermission = true;
     private InterstitialAd mInterstitialAd;
+    private AdView mAdView;
 
 
     @Override
@@ -57,8 +60,10 @@ public class MainActivity extends AppCompatActivity {
         MobileAds.initialize(this, "ca-app-pub-3213913830662648~8626134443");
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-3213913830662648/4441516855");
-        //Test ads
-        //mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
+        //Banner ads
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
 
         mSharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
         mSharedPreferencesEditor = mSharedPreferences.edit();
@@ -92,10 +97,13 @@ public class MainActivity extends AppCompatActivity {
         mMinute = mSharedPreferences.getInt("minute", 0);
         mSet = mSharedPreferences.getBoolean("set", false);
         mTurnOffAds = mSharedPreferences.getBoolean("adsState", false);
+        mAdsPermission = mSharedPreferences.getBoolean("adsPermission", true);
 
         //Loading Ads
         if (!mTurnOffAds) {
             mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            mAdView.loadAd(adRequest);
+
         }
 
         //Add Listener
@@ -103,12 +111,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdLoaded() {
                 // Code to be executed when an ad finishes loading.
-                //Showing the add
-                if (!mTurnOffAds) {
-                    if (mInterstitialAd.isLoaded()) {
-                        mInterstitialAd.show();
-                    }
-                }
             }
 
             @Override
@@ -129,25 +131,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdClosed() {
                 // Code to be executed when when the interstitial ad is closed.
-                AlertDialog.Builder mAlertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-                mAlertDialogBuilder.setMessage("We know ads are stupid, but it's a great way to help the developer. " +
-                        "However you can disable them forever if you want")
-                        .setTitle("Want to turn off the ads ?")
-                        .setPositiveButton("Turn Off Ads", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                mTurnOffAds = true;
-                                mSharedPreferencesEditor.putBoolean("adsState", mTurnOffAds);
-                                mSharedPreferencesEditor.apply();
-                            }
-                        })
-                        .setNegativeButton("Keep Ads For Now", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //Do nothing
-                            }
-                        })
-                        .show();
+                if (mAdsPermission) {
+                    AlertDialog.Builder mAlertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+                    mAlertDialogBuilder.setMessage("We know ads are stupid, but it's a great way to help the developer. " +
+                            "However you can disable them forever if you want")
+                            .setTitle("Want to turn off the ads ?")
+                            .setPositiveButton("Turn Off Ads", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    mTurnOffAds = true;
+                                    mAdsPermission = false;
+                                    mAdView.setVisibility(View.INVISIBLE);
+                                    mSharedPreferencesEditor.putBoolean("adsState", mTurnOffAds);
+                                    mSharedPreferencesEditor.putBoolean("adsPermission", mAdsPermission);
+                                    mSharedPreferencesEditor.apply();
+                                }
+                            })
+                            .setNegativeButton("Keep Ads", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    mAdsPermission = false;
+                                    mSharedPreferencesEditor.putBoolean("adsPermission", mAdsPermission);
+                                    mSharedPreferencesEditor.apply();
+                                }
+                            })
+                            .show();
+                }
             }
         });
 
@@ -170,6 +179,12 @@ public class MainActivity extends AppCompatActivity {
         isSet(mSet);
         checkTime(mHour);
         scheduleNotificationAlarm();
+        //Showing the add
+        if (!mTurnOffAds) {
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            }
+        }
 
     }
 

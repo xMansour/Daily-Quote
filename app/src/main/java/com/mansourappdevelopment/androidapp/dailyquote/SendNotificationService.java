@@ -82,6 +82,7 @@ public class SendNotificationService extends IntentService {
                                     .putExtra(Intent.EXTRA_TEXT, "\"" + quoteText + "\" -" + quoteAuthor), "Daily Quote"),
                             PendingIntent.FLAG_UPDATE_CURRENT));
             mNotification.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+            mNotification.setPriority(Notification.PRIORITY_MAX);
             NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             mNotificationManager.notify(NOTIFICATION_ID, mNotification.build());
         } else {
@@ -98,6 +99,7 @@ public class SendNotificationService extends IntentService {
                                     .putExtra(Intent.EXTRA_TEXT, "\"" + quoteText + "\" -" + quoteAuthor), "Daily Quote"),
                             PendingIntent.FLAG_UPDATE_CURRENT));
             mNotification.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+            mNotification.setPriority(Notification.PRIORITY_MAX);
             NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             mNotificationManager.notify(NOTIFICATION_ID, mNotification.build());
 
