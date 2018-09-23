@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "339825018742",
+    "firebase_url": "https://daily-quote-notification.firebaseio.com",
+    "project_id": "daily-quote-notification",
+    "storage_bucket": "daily-quote-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339825018742:android:dae6e244773a4550",
+        "android_client_info": {
+          "package_name": "com.mansourappdevelopment.androidapp.dailyquote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339825018742-iknp5vraue1s24jfnrb4ir2enchm3imn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mansourappdevelopment.androidapp.dailyquote",
+            "certificate_hash": "3049ecc42fe5ad37fd6cffc2c24ad617c586856f"
+          }
+        },
+        {
+          "client_id": "339825018742-if9rgnf8hurn1k7sea0vnblq15785ulg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAc0obxCCzZJnflVIYac1IPzdB3ry7WOwA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339825018742-if9rgnf8hurn1k7sea0vnblq15785ulg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
