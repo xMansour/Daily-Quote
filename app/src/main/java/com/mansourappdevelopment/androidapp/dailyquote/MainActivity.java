@@ -24,6 +24,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.kobakei.ratethisapp.RateThisApp;
 
 import java.util.Calendar;
 
@@ -45,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
     int mMinute = TIME_CONDITION;
     String mHourConvention;
     boolean mSet = false;
-    boolean mTurnOffAds = false;
-    boolean mAdsPermission = true;
-    private InterstitialAd mInterstitialAd;
+    //boolean mTurnOffAds = false;
+    //boolean mAdsPermission = true;
+    //private InterstitialAd mInterstitialAd;
     private AdView mAdView;
 
 
@@ -58,15 +59,28 @@ public class MainActivity extends AppCompatActivity {
 
         //Initializing the adds
         MobileAds.initialize(this, "ca-app-pub-3213913830662648~8626134443");
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3213913830662648/4441516855");
+
+        //Interstitial ads
+        //mInterstitialAd = new InterstitialAd(this);
+        //mInterstitialAd.setAdUnitId("ca-app-pub-3213913830662648/4441516855");
 
         //Banner ads
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         mSharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
         mSharedPreferencesEditor = mSharedPreferences.edit();
+
+
+        //Rating the app
+        // Monitor launch times and interval from installation
+        RateThisApp.onCreate(this);
+        // If the condition is satisfied, "Rate this app" dialog will be shown
+        RateThisApp.showRateDialogIfNeeded(this);
+        // Custom condition: 3 days and 5 launches
+        RateThisApp.Config config = new RateThisApp.Config(3, 3);
+        RateThisApp.init(config);
 
         mTextAnimation = AnimationUtils.loadAnimation(this, R.anim.text_transition);
         mTextAnimation.setDuration(1000);
@@ -96,18 +110,18 @@ public class MainActivity extends AppCompatActivity {
         mHour = mSharedPreferences.getInt("hour", 0);
         mMinute = mSharedPreferences.getInt("minute", 0);
         mSet = mSharedPreferences.getBoolean("set", false);
-        mTurnOffAds = mSharedPreferences.getBoolean("adsState", false);
-        mAdsPermission = mSharedPreferences.getBoolean("adsPermission", true);
+        //mTurnOffAds = mSharedPreferences.getBoolean("adsState", false);
+        //mAdsPermission = mSharedPreferences.getBoolean("adsPermission", true);
 
         //Loading Ads
-        if (!mTurnOffAds) {
+        /*if (!mTurnOffAds) {
             mInterstitialAd.loadAd(new AdRequest.Builder().build());
             mAdView.loadAd(adRequest);
 
-        }
+        }*/
 
         //Add Listener
-        mInterstitialAd.setAdListener(new AdListener() {
+        /*mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
                 // Code to be executed when an ad finishes loading.
@@ -159,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+*/
 
         isSet(mSet);
     }
@@ -180,11 +194,11 @@ public class MainActivity extends AppCompatActivity {
         checkTime(mHour);
         scheduleNotificationAlarm();
         //Showing the add
-        if (!mTurnOffAds) {
+        /*if (!mTurnOffAds) {
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();
             }
-        }
+        }*/
 
     }
 

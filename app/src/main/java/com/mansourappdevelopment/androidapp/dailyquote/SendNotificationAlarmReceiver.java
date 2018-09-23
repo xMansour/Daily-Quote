@@ -3,6 +3,7 @@ package com.mansourappdevelopment.androidapp.dailyquote;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 
 /**
  * Created by Mansour on 8/30/2018.
@@ -13,6 +14,10 @@ public class SendNotificationAlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Intent mIntent = new Intent(context, SendNotificationService.class);
-        context.startService(mIntent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            context.startForegroundService(mIntent);
+        } else {
+            context.startService(mIntent);
+        }
     }
 }

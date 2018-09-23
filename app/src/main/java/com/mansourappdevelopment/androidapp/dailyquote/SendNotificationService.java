@@ -13,6 +13,7 @@ import android.support.v4.app.NotificationCompat;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,6 +33,13 @@ public class SendNotificationService extends IntentService {
 
     public SendNotificationService() {
         super("SendNotificationService");
+    }
+
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        startForeground(1,new Notification());
     }
 
     @Override
@@ -79,7 +87,7 @@ public class SendNotificationService extends IntentService {
                     PendingIntent.getActivity(this, 0,
                             Intent.createChooser(new Intent(Intent.ACTION_SEND)
                                     .setType("text/plain")
-                                    .putExtra(Intent.EXTRA_TEXT, "\"" + quoteText + "\" -" + quoteAuthor), "Daily Quote"),
+                                    .putExtra(Intent.EXTRA_TEXT, "\"" + quoteText + "\" -" + quoteAuthor), "Share via"),
                             PendingIntent.FLAG_UPDATE_CURRENT));
             mNotification.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
             mNotification.setPriority(Notification.PRIORITY_MAX);
@@ -96,7 +104,7 @@ public class SendNotificationService extends IntentService {
                     PendingIntent.getActivity(this, 0,
                             Intent.createChooser(new Intent(Intent.ACTION_SEND)
                                     .setType("text/plain")
-                                    .putExtra(Intent.EXTRA_TEXT, "\"" + quoteText + "\" -" + quoteAuthor), "Daily Quote"),
+                                    .putExtra(Intent.EXTRA_TEXT, "\"" + quoteText + "\" -" + quoteAuthor), "Share via"),
                             PendingIntent.FLAG_UPDATE_CURRENT));
             mNotification.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
             mNotification.setPriority(Notification.PRIORITY_MAX);
