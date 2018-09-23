@@ -4,13 +4,11 @@ package com.mansourappdevelopment.androidapp.dailyquote;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,14 +17,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.kobakei.ratethisapp.RateThisApp;
 
 import java.util.Calendar;
+
+import hotchemi.android.rate.AppRate;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -74,13 +71,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Rating the app
-        // Monitor launch times and interval from installation
-        RateThisApp.onCreate(this);
-        // If the condition is satisfied, "Rate this app" dialog will be shown
-        RateThisApp.showRateDialogIfNeeded(this);
-        // Custom condition: 3 days and 5 launches
-        RateThisApp.Config config = new RateThisApp.Config(3, 3);
-        RateThisApp.init(config);
+        AppRate.with(this)
+                .setInstallDays(1)
+                .setLaunchTimes(3)
+                .setRemindInterval(2)
+                .monitor();
+        AppRate.showRateDialogIfMeetsConditions(this);
+
 
         mTextAnimation = AnimationUtils.loadAnimation(this, R.anim.text_transition);
         mTextAnimation.setDuration(1000);
